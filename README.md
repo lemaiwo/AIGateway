@@ -10,25 +10,24 @@ Simply open `index.html` in your browser, or deploy to any static hosting platfo
 
 ### GitHub Pages
 
-1. Push this folder to a GitHub repository
+1. Push this repository to GitHub
 2. Go to **Settings** → **Pages**
-3. Select your branch (e.g., `main`) and folder (`/landing-page` or root)
+3. Select your branch (e.g., `main`) and root folder
 4. Click **Save**
 5. Your site will be available at `https://username.github.io/repo-name`
 
 ### Vercel
 
 1. Install Vercel CLI: `npm i -g vercel`
-2. Navigate to this directory: `cd landing-page`
-3. Run: `vercel`
-4. Follow the prompts
+2. Run: `vercel`
+3. Follow the prompts
 
 Or connect your GitHub repository directly at [vercel.com](https://vercel.com).
 
 ### Netlify
 
 1. Go to [netlify.com](https://netlify.com) and sign in
-2. Drag and drop the `landing-page` folder onto the deploy area
+2. Drag and drop this folder onto the deploy area
 3. Your site is live instantly
 
 Or connect your GitHub repository for automatic deployments.
@@ -48,7 +47,7 @@ This is a single HTML file with no dependencies. Upload `index.html` to any web 
 ## File Structure
 
 ```
-landing-page/
+/
 ├── index.html    # Complete landing page with embedded CSS
 ├── README.md     # This file
 └── .gitignore    # Git ignore patterns
