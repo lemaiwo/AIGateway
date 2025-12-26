@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Gateway for SAP | Connect AI Agents to SAP via MCP</title>
+    <meta name="description" content="Connect any AI agent to your SAP systems via Model Context Protocol. Works with Claude, GPT, Gemini, or any LLM.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d4aa;
+            --primary-dark: #00a888;
+            --accent: #f0ab00;
+            --bg-dark: #0a0f14;
+            --bg-card: #111820;
+            --bg-card-hover: #161e28;
+            --text-primary: #ffffff;
+            --text-secondary: #8b9ab0;
+            --text-muted: #5a6a7a;
+            --border: #1e2832;
+            --border-light: #2a3542;
+            --code-bg: #0d1218;
+            --success: #00d4aa;
+            --font-body: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Grid Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(30, 40, 50, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 40, 50, 0.3) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 15, 20, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card);
+            border-color: var(--text-muted);
+        }
+
+        .btn-nav {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(0, 212, 170, 0.1);
+            border: 1px solid rgba(0, 212, 170, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .hero-ctas {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        /* Terminal Mockup */
+        .terminal {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--code-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            text-align: left;
+            box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.5);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 18px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #ffbd2e; }
+        .terminal-dot.green { background: #28ca42; }
+
+        .terminal-title {
+            margin-left: 8px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+        }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+
+        .terminal-line {
+            margin-bottom: 4px;
+        }
+
+        .terminal-prompt {
+            color: var(--primary);
+        }
+
+        .terminal-command {
+            color: var(--text-primary);
+        }
+
+        .terminal-output {
+            color: var(--text-muted);
+            padding-left: 16px;
+        }
+
+        .terminal-success {
+            color: var(--success);
+        }
+
+        .terminal-accent {
+            color: var(--accent);
+        }
+
+        /* Analogy Section */
+        .analogy {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .analogy-boxes {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 24px;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .analogy-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .analogy-box.faded {
+            opacity: 0.6;
+        }
+
+        .analogy-box.highlighted {
+            border-color: var(--primary);
+            box-shadow: 0 0 40px -10px rgba(0, 212, 170, 0.3);
+        }
+
+        .analogy-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .analogy-box h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .analogy-box.highlighted h3 {
+            color: var(--primary);
+        }
+
+        .analogy-box p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .analogy-arrow {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-light);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 212, 170, 0.1);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+            background: var(--bg-card);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            position: relative;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            z-index: 0;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: var(--bg-dark);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .step h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Early Access */
+        .early-access {
+            padding: 100px 0;
+        }
+
+        .early-access .section-header h2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .early-boxes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .early-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .early-box h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .early-box ul {
+            list-style: none;
+        }
+
+        .early-box li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .early-box li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 100px 0;
+            background: var(--bg-card);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto 40px;
+        }
+
+        .pricing-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 32px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.02);
+            box-shadow: 0 0 60px -20px rgba(0, 212, 170, 0.4);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: var(--bg-dark);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .pricing-price {
+            margin: 24px 0;
+        }
+
+        .price-original {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            margin-bottom: 4px;
+        }
+
+        .price-current {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .price-current span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .price-early {
+            display: inline-block;
+            background: rgba(0, 212, 170, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin: 32px 0;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .pricing-card .btn {
+            width: 100%;
+        }
+
+        .pricing-note {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .pricing-note strong {
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0 40px;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .footer-col h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+                order: -1;
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .analogy-boxes {
+                grid-template-columns: 1fr;
+            }
+
+            .analogy-arrow {
+                transform: rotate(90deg);
+            }
+
+            .early-boxes {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 120px 0 80px;
+            }
+
+            .terminal-body {
+                font-size: 0.75rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-links {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .terminal {
+                margin: 0 -12px;
+                border-radius: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">AI</div>
+                <span>AI Gateway</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="mailto:wouter@lemaire.tech" class="btn btn-primary btn-nav">Request Pilot</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Early Access Program
+            </div>
+            <h1>The <span>AI Gateway</span> for SAP</h1>
+            <p class="hero-subtitle">
+                Connect any AI agent to your SAP systems via Model Context Protocol.
+                Works with Claude, GPT, Gemini, or any LLM. Setup wizard included.
+            </p>
+            <div class="hero-ctas">
+                <a href="mailto:wouter@lemaire.tech" class="btn btn-primary">Request a Pilot</a>
+                <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+            </div>
+
+            <!-- Terminal Mockup -->
+            <div class="terminal">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">ai-gateway ~ terminal</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$ </span>
+                        <span class="terminal-command">claude "Show me all open purchase orders over €50,000"</span>
+                    </div>
+                    <div class="terminal-line terminal-output">→ Connecting to SAP via AI Gateway...</div>
+                    <div class="terminal-line terminal-output">→ GET /sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrder</div>
+                    <div class="terminal-line terminal-output terminal-success">✓ Found 12 purchase orders matching criteria</div>
+                    <br>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$ </span>
+                        <span class="terminal-command">claude "Create a goods receipt for PO 4500001234"</span>
+                    </div>
+                    <div class="terminal-line terminal-output">→ Checking hints for <span class="terminal-accent">GoodsReceipt</span> entity...</div>
+                    <div class="terminal-line terminal-output">→ POST /sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</div>
+                    <div class="terminal-line terminal-output terminal-success">✓ Goods receipt 5000012345 created successfully</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analogy Section -->
+    <section class="analogy">
+        <div class="container">
+            <div class="section-header">
+                <h2>The next step in SAP connectivity</h2>
+                <p>Gateway enabled Fiori apps on SAP. Now, AI Gateway enables AI agents.</p>
+            </div>
+            <div class="analogy-boxes">
+                <div class="analogy-box faded">
+                    <div class="analogy-icon">📱</div>
+                    <h3>SAP Gateway</h3>
+                    <p>Enabled Fiori apps to work with SAP data through a standardized interface</p>
+                </div>
+                <div class="analogy-arrow">→</div>
+                <div class="analogy-box highlighted">
+                    <div class="analogy-icon">🤖</div>
+                    <h3>AI Gateway</h3>
+                    <p>Enables AI agents to work with SAP data through a standardized interface</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything you need to connect AI to SAP</h2>
+                <p>A complete toolkit for enterprise AI-SAP integration</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧙</div>
+                    <h3>Setup Wizard</h3>
+                    <p>Guided installation and configuration. Connect your SAP system step-by-step without reading documentation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔌</div>
+                    <h3>MCP Server</h3>
+                    <p>Standard Model Context Protocol server that connects your AI agents to SAP OData and RFC interfaces.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Hints Management</h3>
+                    <p>Teach your AI how to use SAP APIs correctly. Add hints for entities, services, and edge cases.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>API Monitoring</h3>
+                    <p>See every request your AI agent makes. Track success/failure, methods, endpoints.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Test Chat Client</h3>
+                    <p>Web-based chat interface to test your AI Gateway before connecting production agents.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Continuous Improvement</h3>
+                    <p>Full lifecycle: test → monitor → add hints → improve. Refine AI behavior over time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Get your AI connected to SAP in four simple steps</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Run Wizard</h3>
+                    <p>Guided setup connects to SAP and configures security</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Add Hints</h3>
+                    <p>Activate APIs for AI by adding hints for your entities</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Test</h3>
+                    <p>Use the chat client to validate AI interactions</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Monitor & Improve</h3>
+                    <p>Track requests, add hints for edge cases</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Early Access -->
+    <section class="early-access">
+        <div class="container">
+            <div class="section-header">
+                <h2>🚀 Early Access Program</h2>
+                <p>Be among the first to connect AI to SAP</p>
+            </div>
+            <div class="early-boxes">
+                <div class="early-box">
+                    <h3>Current Status</h3>
+                    <ul>
+                        <li>Core platform is open source</li>
+                        <li>Advanced features in customer pilot</li>
+                        <li>Validated with MM, SD, and PP modules</li>
+                        <li>Production-ready architecture</li>
+                    </ul>
+                </div>
+                <div class="early-box">
+                    <h3>What Early Access Means</h3>
+                    <ul>
+                        <li>50% discount on all plans</li>
+                        <li>Direct access to developers</li>
+                        <li>Shape the product roadmap</li>
+                        <li>Priority feature requests</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Start small, scale as you grow</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="pricing-price">
+                        <div class="price-original">€299/month</div>
+                        <div class="price-current">€149<span>/month</span></div>
+                        <div class="price-early">Early Access Price</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>1 SAP system</li>
+                        <li>Setup wizard</li>
+                        <li>Basic monitoring</li>
+                        <li>Email support</li>
+                    </ul>
+                    <a href="mailto:wouter@lemaire.tech" class="btn btn-secondary">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="pricing-price">
+                        <div class="price-original">€799/month</div>
+                        <div class="price-current">€399<span>/month</span></div>
+                        <div class="price-early">Early Access Price</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>3 SAP systems</li>
+                        <li>Full hints UI</li>
+                        <li>Advanced monitoring</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="mailto:wouter@lemaire.tech" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="pricing-price">
+                        <div class="price-current">Custom</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Unlimited SAP systems</li>
+                        <li>Dedicated instance</li>
+                        <li>On-premise option</li>
+                        <li>SLA guarantee</li>
+                    </ul>
+                    <a href="mailto:wouter@lemaire.tech" class="btn btn-secondary">Contact Sales</a>
+                </div>
+            </div>
+            <p class="pricing-note"><strong>Setup & onboarding:</strong> €2,000 one-time fee</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to connect AI to your SAP systems?</h2>
+            <div class="cta-buttons">
+                <a href="mailto:wouter@lemaire.tech" class="btn btn-primary">Request a Pilot</a>
+                <a href="https://github.com/lemaiwo/AIGateway" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">AI</div>
+                        <span>AI Gateway</span>
+                    </a>
+                    <p>Connecting AI agents to SAP systems via Model Context Protocol.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Product</h4>
+                        <ul>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#pricing">Pricing</a></li>
+                            <li><a href="https://github.com/lemaiwo/AIGateway" target="_blank" rel="noopener">Documentation</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="https://github.com/lemaiwo/AIGateway" target="_blank" rel="noopener">GitHub</a></li>
+                            <li><a href="https://community.sap.com" target="_blank" rel="noopener">SAP Community</a></li>
+                            <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 AI Gateway. Not affiliated with SAP SE.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
