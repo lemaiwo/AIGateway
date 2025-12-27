@@ -200,6 +200,7 @@
         /* Hero Section */
         .hero {
             padding: 160px 0 100px;
+            overflow: hidden;
         }
 
         .hero-content {
@@ -207,6 +208,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
+            overflow: hidden;
         }
 
         .hero-bottom {
@@ -214,11 +216,14 @@
             display: flex;
             justify-content: center;
             margin-top: 40px;
+            overflow: hidden;
+            max-width: 100%;
         }
 
         .hero-bottom .terminal {
             max-width: 800px;
             width: 100%;
+            overflow: hidden;
         }
 
         .badge {
@@ -281,6 +286,8 @@
             justify-content: center;
             align-items: center;
             width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
 
         .hero-visual svg {
@@ -330,6 +337,7 @@
             font-family: var(--font-mono);
             font-size: 0.8rem;
             line-height: 1.8;
+            overflow-x: auto;
         }
 
         .terminal-line {
