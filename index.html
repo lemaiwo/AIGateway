@@ -23,6 +23,7 @@
             --border-light: #2a3542;
             --code-bg: #0d1218;
             --success: #00d4aa;
+            --error: #ff6b6b;
             --font-body: 'Outfit', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
@@ -74,7 +75,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(10, 15, 20, 0.9);
+            background: rgba(10, 15, 20, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
         }
@@ -89,7 +90,7 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.25rem;
@@ -100,13 +101,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
         }
 
         .logo-icon svg {
             width: 100%;
             height: 100%;
+        }
+
+        .logo-text {
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            font-weight: 400;
+            color: var(--text-secondary);
         }
 
         .nav-links {
@@ -163,6 +173,16 @@
             border-color: var(--text-muted);
         }
 
+        .btn-accent {
+            background: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        .btn-accent:hover {
+            background: #d99a00;
+            transform: translateY(-1px);
+        }
+
         .btn-nav {
             padding: 10px 20px;
             font-size: 0.9rem;
@@ -180,7 +200,13 @@
         /* Hero Section */
         .hero {
             padding: 160px 0 100px;
-            text-align: center;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
         }
 
         .badge {
@@ -211,47 +237,38 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 700;
             line-height: 1.1;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
+            margin-bottom: 20px;
         }
 
         .hero-subtitle {
             font-size: 1.25rem;
             color: var(--text-secondary);
-            max-width: 640px;
-            margin: 0 auto 40px;
-            line-height: 1.7;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .hero-tagline {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 32px;
         }
 
         .hero-ctas {
             display: flex;
-            justify-content: center;
             gap: 16px;
-            margin-bottom: 60px;
             flex-wrap: wrap;
         }
 
         /* Terminal Mockup */
         .terminal {
-            max-width: 800px;
-            margin: 0 auto;
             background: var(--code-bg);
             border-radius: 12px;
             border: 1px solid var(--border);
             overflow: hidden;
-            text-align: left;
             box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.5);
         }
 
@@ -284,7 +301,7 @@
         .terminal-body {
             padding: 20px;
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             line-height: 1.8;
         }
 
@@ -313,9 +330,10 @@
             color: var(--accent);
         }
 
-        /* Analogy Section */
-        .analogy {
+        /* Problem Section */
+        .problem {
             padding: 100px 0;
+            background: var(--bg-card);
         }
 
         .section-header {
@@ -332,8 +350,49 @@
         .section-header p {
             color: var(--text-secondary);
             font-size: 1.1rem;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto 40px;
+        }
+
+        .problem-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: var(--bg-dark);
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid var(--error);
+        }
+
+        .problem-icon {
+            color: var(--error);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .problem-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .problem-summary {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Analogy Section */
+        .analogy {
+            padding: 100px 0;
         }
 
         .analogy-boxes {
@@ -392,6 +451,7 @@
         /* Features Section */
         .features {
             padding: 100px 0;
+            background: var(--bg-card);
         }
 
         .features-grid {
@@ -401,7 +461,7 @@
         }
 
         .feature-card {
-            background: var(--bg-card);
+            background: var(--bg-dark);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 32px;
@@ -441,7 +501,6 @@
         /* How It Works */
         .how-it-works {
             padding: 100px 0;
-            background: var(--bg-card);
         }
 
         .steps {
@@ -495,16 +554,72 @@
             line-height: 1.5;
         }
 
-        /* Early Access */
-        .early-access {
+        /* Differentiators */
+        .differentiators {
             padding: 100px 0;
+            background: var(--bg-card);
         }
 
-        .early-access .section-header h2 {
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .diff-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .diff-check {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: var(--bg-dark);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .diff-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .diff-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .social-proof blockquote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Early Access */
+        .early-access {
+            padding: 100px 0;
         }
 
         .early-boxes {
@@ -679,6 +794,12 @@
         .cta-section h2 {
             font-size: clamp(1.75rem, 4vw, 2.5rem);
             font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
             margin-bottom: 32px;
         }
 
@@ -777,6 +898,10 @@
             .steps::before {
                 display: none;
             }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -796,7 +921,9 @@
                 transform: rotate(90deg);
             }
 
-            .early-boxes {
+            .early-boxes,
+            .problem-grid,
+            .diff-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -813,7 +940,7 @@
             }
 
             .terminal-body {
-                font-size: 0.75rem;
+                font-size: 0.7rem;
             }
 
             .footer-content {
@@ -828,12 +955,10 @@
         @media (max-width: 480px) {
             .hero-ctas {
                 flex-direction: column;
-                align-items: center;
             }
 
             .btn {
                 width: 100%;
-                max-width: 280px;
             }
 
             .terminal {
@@ -897,13 +1022,13 @@
                         </g>
                     </svg>
                 </div>
-                <span>AI Gateway</span>
+                <span class="logo-text">AI Gateway <span>for SAP</span></span>
             </a>
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#how-it-works">How It Works</a>
                 <a href="#pricing">Pricing</a>
-                <a href="mailto:wouter@lemaire.tech" class="btn btn-primary btn-nav">Request Pilot</a>
+                <a href="mailto:wouter@lemaire.tech" class="btn btn-primary btn-nav">Request Demo</a>
             </div>
             <button class="mobile-menu-btn" aria-label="Menu">☰</button>
         </div>
@@ -912,46 +1037,79 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="badge">
-                <span class="badge-dot"></span>
-                Early Access Program
+            <div class="hero-content">
+                <div>
+                    <div class="badge">
+                        <span class="badge-dot"></span>
+                        Early Access Program
+                    </div>
+                    <h1>Connect any AI agent to your SAP systems</h1>
+                    <p class="hero-subtitle">
+                        Safely, without custom development. Works with Claude, GPT, Gemini, or any LLM via Model Context Protocol.
+                    </p>
+                    <p class="hero-tagline">
+                        Gateway enabled Fiori apps on SAP. AI Gateway enables AI agents on SAP.
+                    </p>
+                    <div class="hero-ctas">
+                        <a href="mailto:wouter@lemaire.tech" class="btn btn-accent">Request a Demo</a>
+                        <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">ai-gateway ~ terminal</span>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$ </span>
+                            <span class="terminal-command">claude "Show me all open purchase orders over €50,000"</span>
+                        </div>
+                        <div class="terminal-line terminal-output">→ Connecting to SAP via AI Gateway...</div>
+                        <div class="terminal-line terminal-output">→ GET /sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrder</div>
+                        <div class="terminal-line terminal-output terminal-success">✓ Found 12 purchase orders matching criteria</div>
+                        <br>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$ </span>
+                            <span class="terminal-command">claude "Create a goods receipt for PO 4500001234"</span>
+                        </div>
+                        <div class="terminal-line terminal-output">→ Checking hints for <span class="terminal-accent">GoodsReceipt</span> entity...</div>
+                        <div class="terminal-line terminal-output">→ POST /sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</div>
+                        <div class="terminal-line terminal-output terminal-success">✓ Goods receipt 5000012345 created successfully</div>
+                    </div>
+                </div>
             </div>
-            <h1>The <span>AI Gateway</span> for SAP</h1>
-            <p class="hero-subtitle">
-                Connect any AI agent to your SAP systems via Model Context Protocol.
-                Works with Claude, GPT, Gemini, or any LLM. Setup wizard included.
-            </p>
-            <div class="hero-ctas">
-                <a href="mailto:wouter@lemaire.tech" class="btn btn-primary">Request a Pilot</a>
-                <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
-            </div>
+        </div>
+    </section>
 
-            <!-- Terminal Mockup -->
-            <div class="terminal">
-                <div class="terminal-header">
-                    <span class="terminal-dot red"></span>
-                    <span class="terminal-dot yellow"></span>
-                    <span class="terminal-dot green"></span>
-                    <span class="terminal-title">ai-gateway ~ terminal</span>
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <div class="section-header">
+                <h2>The AI-SAP gap is real</h2>
+                <p>Companies want AI agents to automate SAP workflows. But connecting AI to enterprise systems is a project, not a product.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-item">
+                    <span class="problem-icon">✗</span>
+                    <p>SAP APIs aren't documented for AI consumption</p>
                 </div>
-                <div class="terminal-body">
-                    <div class="terminal-line">
-                        <span class="terminal-prompt">$ </span>
-                        <span class="terminal-command">claude "Show me all open purchase orders over €50,000"</span>
-                    </div>
-                    <div class="terminal-line terminal-output">→ Connecting to SAP via AI Gateway...</div>
-                    <div class="terminal-line terminal-output">→ GET /sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrder</div>
-                    <div class="terminal-line terminal-output terminal-success">✓ Found 12 purchase orders matching criteria</div>
-                    <br>
-                    <div class="terminal-line">
-                        <span class="terminal-prompt">$ </span>
-                        <span class="terminal-command">claude "Create a goods receipt for PO 4500001234"</span>
-                    </div>
-                    <div class="terminal-line terminal-output">→ Checking hints for <span class="terminal-accent">GoodsReceipt</span> entity...</div>
-                    <div class="terminal-line terminal-output">→ POST /sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</div>
-                    <div class="terminal-line terminal-output terminal-success">✓ Goods receipt 5000012345 created successfully</div>
+                <div class="problem-item">
+                    <span class="problem-icon">✗</span>
+                    <p>AI agents hallucinate endpoints that don't exist</p>
+                </div>
+                <div class="problem-item">
+                    <span class="problem-icon">✗</span>
+                    <p>No visibility into what the AI is actually doing</p>
+                </div>
+                <div class="problem-item">
+                    <span class="problem-icon">✗</span>
+                    <p>Every customer needs custom integration work</p>
                 </div>
             </div>
+            <p class="problem-summary">You shouldn't need a development team to connect AI to SAP.</p>
         </div>
     </section>
 
@@ -960,7 +1118,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>The next step in SAP connectivity</h2>
-                <p>Gateway enabled Fiori apps on SAP. Now, AI Gateway enables AI agents.</p>
+                <p>A standardized interface for AI agents, just like Gateway provided for Fiori apps.</p>
             </div>
             <div class="analogy-boxes">
                 <div class="analogy-box faded">
@@ -983,7 +1141,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>Everything you need to connect AI to SAP</h2>
-                <p>A complete toolkit for enterprise AI-SAP integration</p>
+                <p>A complete product — not a framework, not a starting point.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
@@ -1030,8 +1188,8 @@
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Run Wizard</h3>
-                    <p>Guided setup connects to SAP and configures security</p>
+                    <h3>Connect</h3>
+                    <p>Run the wizard to connect to SAP and configure security</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
@@ -1046,9 +1204,58 @@
                 <div class="step">
                     <div class="step-number">4</div>
                     <h3>Monitor & Improve</h3>
-                    <p>Track requests, add hints for edge cases</p>
+                    <p>Track requests, add hints for edge cases, repeat</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Differentiators -->
+    <section class="differentiators">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why AI Gateway</h2>
+                <p>Built specifically for enterprise SAP environments</p>
+            </div>
+            <div class="diff-grid">
+                <div class="diff-item">
+                    <span class="diff-check">✓</span>
+                    <div>
+                        <h4>Works with any AI platform</h4>
+                        <p>Not locked to one vendor — Claude, GPT, Copilot, or any MCP-compatible agent</p>
+                    </div>
+                </div>
+                <div class="diff-item">
+                    <span class="diff-check">✓</span>
+                    <div>
+                        <h4>Generic SAP connectivity</h4>
+                        <p>Any SAP API, any module — MM, SD, PP, and beyond</p>
+                    </div>
+                </div>
+                <div class="diff-item">
+                    <span class="diff-check">✓</span>
+                    <div>
+                        <h4>Full visibility and control</h4>
+                        <p>Know exactly what AI does in your system with complete audit trails</p>
+                    </div>
+                </div>
+                <div class="diff-item">
+                    <span class="diff-check">✓</span>
+                    <div>
+                        <h4>Production ready</h4>
+                        <p>Enterprise customer already deployed and moving to production</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <blockquote>
+                "Currently deployed with an enterprise SAP customer moving from proof-of-concept to production."
+            </blockquote>
         </div>
     </section>
 
@@ -1143,8 +1350,9 @@
     <section class="cta-section">
         <div class="container">
             <h2>Ready to connect AI to your SAP systems?</h2>
+            <p>Start with a demo or pilot project. See AI Gateway working with your system.</p>
             <div class="cta-buttons">
-                <a href="mailto:wouter@lemaire.tech" class="btn btn-primary">Request a Pilot</a>
+                <a href="mailto:wouter@lemaire.tech" class="btn btn-primary">Request a Demo</a>
                 <a href="https://github.com/lemaiwo/AIGateway" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub</a>
             </div>
         </div>
@@ -1205,7 +1413,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span>AI Gateway</span>
+                        <span class="logo-text">AI Gateway <span>for SAP</span></span>
                     </a>
                     <p>Connecting AI agents to SAP systems via Model Context Protocol.</p>
                 </div>
