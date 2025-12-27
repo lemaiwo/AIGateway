@@ -280,11 +280,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
         }
 
         .hero-visual svg {
-            width: 280px;
-            height: 280px;
+            width: 100%;
+            max-width: 280px;
+            height: auto;
             filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
         }
 
@@ -939,12 +941,15 @@
             }
 
             .hero-visual svg {
-                width: 200px;
-                height: 200px;
+                max-width: 200px;
             }
 
             .hero-bottom {
                 margin-top: 30px;
+            }
+
+            .hero-content {
+                gap: 30px;
             }
         }
 
@@ -983,22 +988,39 @@
                 padding: 100px 0 60px;
             }
 
+            .hero-content {
+                gap: 24px;
+            }
+
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.75rem;
             }
 
             .hero-subtitle {
-                font-size: 1.1rem;
+                font-size: 1rem;
+            }
+
+            .hero-tagline {
+                font-size: 0.9rem;
+                margin-bottom: 24px;
             }
 
             .hero-visual svg {
-                width: 160px;
-                height: 160px;
+                max-width: 150px;
+            }
+
+            .hero-bottom {
+                margin-top: 24px;
             }
 
             .terminal-body {
-                font-size: 0.65rem;
-                padding: 16px;
+                font-size: 0.6rem;
+                padding: 14px;
+                overflow-x: auto;
+            }
+
+            .terminal-line {
+                white-space: nowrap;
             }
 
             .terminal-header {
@@ -1056,24 +1078,32 @@
             }
 
             .hero {
-                padding: 90px 0 50px;
+                padding: 90px 0 40px;
+            }
+
+            .hero-content {
+                gap: 20px;
             }
 
             .hero h1 {
-                font-size: 1.75rem;
+                font-size: 1.5rem;
             }
 
             .hero-subtitle {
-                font-size: 1rem;
+                font-size: 0.95rem;
             }
 
             .hero-tagline {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+                margin-bottom: 20px;
             }
 
             .hero-visual svg {
-                width: 140px;
-                height: 140px;
+                max-width: 120px;
+            }
+
+            .hero-bottom {
+                margin-top: 20px;
             }
 
             .hero-ctas {
@@ -1091,17 +1121,25 @@
             }
 
             .terminal-body {
-                font-size: 0.55rem;
-                padding: 12px;
-                overflow-x: auto;
+                font-size: 0.5rem;
+                padding: 10px;
             }
 
-            .terminal-line {
-                white-space: nowrap;
+            .terminal-header {
+                padding: 8px 12px;
+            }
+
+            .terminal-dot {
+                width: 8px;
+                height: 8px;
             }
 
             .section-header h2 {
-                font-size: 1.35rem;
+                font-size: 1.25rem;
+            }
+
+            .section-header p {
+                font-size: 0.9rem;
             }
 
             .analogy-icon {
@@ -1109,13 +1147,25 @@
             }
 
             .analogy-box h3 {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
+            }
+
+            .analogy-box p {
+                font-size: 0.85rem;
             }
 
             .feature-icon {
                 width: 40px;
                 height: 40px;
                 font-size: 1.25rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .feature-card p {
+                font-size: 0.9rem;
             }
 
             .pricing-grid {
@@ -1129,6 +1179,11 @@
             .footer-links {
                 flex-direction: column;
                 gap: 30px;
+            }
+
+            .badge {
+                font-size: 0.75rem;
+                padding: 6px 12px;
             }
         }
     </style>
