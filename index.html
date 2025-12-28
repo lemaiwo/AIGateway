@@ -652,6 +652,109 @@
             margin: 0 auto;
         }
 
+        /* Compatible Agents */
+        .agents {
+            padding: 80px 0;
+            background: var(--bg-card);
+        }
+
+        .agents-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .agent-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 24px 32px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: all 0.3s;
+            min-width: 140px;
+        }
+
+        .agent-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .agent-logo {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .agent-logo svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .agent-card span {
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .agents-note {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .agents-note strong {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .agents-grid {
+                gap: 20px;
+            }
+
+            .agent-card {
+                padding: 20px 24px;
+                min-width: 120px;
+            }
+
+            .agent-logo {
+                width: 48px;
+                height: 48px;
+            }
+
+            .agent-card span {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .agents-grid {
+                gap: 16px;
+            }
+
+            .agent-card {
+                padding: 16px 20px;
+                min-width: 100px;
+            }
+
+            .agent-logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .agent-card span {
+                font-size: 0.8rem;
+            }
+        }
+
         /* Early Access */
         .early-access {
             padding: 100px 0;
@@ -1386,6 +1489,117 @@
                 </div>
             </div>
             <p class="problem-summary">You shouldn't need a development team to connect AI to SAP.</p>
+        </div>
+    </section>
+
+    <!-- Compatible Agents Section -->
+    <section class="agents">
+        <div class="container">
+            <div class="section-header">
+                <h2>Works with your favorite AI agents</h2>
+                <p>Tested and proven with leading AI platforms. Any MCP-compatible agent works out of the box.</p>
+            </div>
+            <div class="agents-grid">
+                <!-- Claude -->
+                <div class="agent-card">
+                    <div class="agent-logo">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="64" height="64" rx="14" fill="#D4A574"/>
+                            <path d="M32 16C23.2 16 16 23.2 16 32s7.2 16 16 16 16-7.2 16-16-7.2-16-16-16zm0 28c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z" fill="#1a1a1a"/>
+                            <circle cx="26" cy="30" r="3" fill="#1a1a1a"/>
+                            <circle cx="38" cy="30" r="3" fill="#1a1a1a"/>
+                            <path d="M26 38c0 0 2 4 6 4s6-4 6-4" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span>Claude</span>
+                </div>
+                <!-- Microsoft Copilot -->
+                <div class="agent-card">
+                    <div class="agent-logo">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="64" height="64" rx="14" fill="#1a1a2e"/>
+                            <defs>
+                                <linearGradient id="copilotGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00bcf2"/>
+                                    <stop offset="100%" style="stop-color:#00a4ef"/>
+                                </linearGradient>
+                                <linearGradient id="copilotGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#7fba00"/>
+                                    <stop offset="100%" style="stop-color:#5fa000"/>
+                                </linearGradient>
+                                <linearGradient id="copilotGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#f25022"/>
+                                    <stop offset="100%" style="stop-color:#d73b15"/>
+                                </linearGradient>
+                                <linearGradient id="copilotGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffb900"/>
+                                    <stop offset="100%" style="stop-color:#e6a600"/>
+                                </linearGradient>
+                            </defs>
+                            <path d="M20 20h10v10H20z" fill="url(#copilotGrad3)"/>
+                            <path d="M34 20h10v10H34z" fill="url(#copilotGrad2)"/>
+                            <path d="M20 34h10v10H20z" fill="url(#copilotGrad1)"/>
+                            <path d="M34 34h10v10H34z" fill="url(#copilotGrad4)"/>
+                        </svg>
+                    </div>
+                    <span>Copilot</span>
+                </div>
+                <!-- Mistral -->
+                <div class="agent-card">
+                    <div class="agent-logo">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="64" height="64" rx="14" fill="#1a1a1a"/>
+                            <g fill="#FF7000">
+                                <rect x="12" y="14" width="8" height="8"/>
+                                <rect x="44" y="14" width="8" height="8"/>
+                                <rect x="12" y="24" width="8" height="8"/>
+                                <rect x="28" y="24" width="8" height="8"/>
+                                <rect x="44" y="24" width="8" height="8"/>
+                                <rect x="12" y="34" width="8" height="8"/>
+                                <rect x="20" y="34" width="8" height="8"/>
+                                <rect x="36" y="34" width="8" height="8"/>
+                                <rect x="44" y="34" width="8" height="8"/>
+                                <rect x="12" y="44" width="8" height="8"/>
+                                <rect x="44" y="44" width="8" height="8"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <span>Mistral</span>
+                </div>
+                <!-- Custom Agents -->
+                <div class="agent-card">
+                    <div class="agent-logo">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="64" height="64" rx="14" fill="#1e2832"/>
+                            <circle cx="32" cy="28" r="10" stroke="#00d4aa" stroke-width="2.5" fill="none"/>
+                            <path d="M22 44c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="#00d4aa" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                            <path d="M44 20l4-4M16 20l-4-4M44 36l4 4M16 36l-4 4" stroke="#00d4aa" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span>Custom Agents</span>
+                </div>
+                <!-- Any MCP Agent -->
+                <div class="agent-card">
+                    <div class="agent-logo">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="64" height="64" rx="14" fill="#0d1218"/>
+                            <defs>
+                                <linearGradient id="mcpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00d4aa"/>
+                                    <stop offset="100%" style="stop-color:#00a888"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="32" cy="32" r="16" stroke="url(#mcpGrad)" stroke-width="2.5" fill="none"/>
+                            <circle cx="32" cy="22" r="4" fill="url(#mcpGrad)"/>
+                            <circle cx="22" cy="38" r="4" fill="url(#mcpGrad)"/>
+                            <circle cx="42" cy="38" r="4" fill="url(#mcpGrad)"/>
+                            <path d="M32 26v6M26 36l4-4M38 36l-4-4" stroke="url(#mcpGrad)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span>Any MCP Agent</span>
+                </div>
+            </div>
+            <p class="agents-note">Built on the <strong>Model Context Protocol (MCP)</strong> standard — works with any compatible AI agent</p>
         </div>
     </section>
 
