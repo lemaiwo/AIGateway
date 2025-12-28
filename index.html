@@ -763,9 +763,9 @@
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            max-width: 1000px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
             margin: 0 auto 40px;
         }
 
@@ -954,17 +954,21 @@
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 700px;
+            }
+        }
+
+        @media (max-width: 768px) {
             .pricing-grid {
                 grid-template-columns: 1fr;
                 max-width: 400px;
             }
+        }
 
-            .pricing-card.featured {
-                transform: none;
-                order: -1;
-            }
-
+        @media (max-width: 1024px) {
             .steps {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1693,15 +1697,25 @@
                 <p>Start small, scale as you grow</p>
             </div>
             <div class="pricing-grid">
-                <div class="pricing-card featured">
-                    <div class="pricing-badge">Most Popular</div>
+                <div class="pricing-card">
+                    <h3>Free Trial</h3>
+                    <div class="pricing-price">
+                        <div class="price-current">Free</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>3 APIs</li>
+                        <li>6 hints</li>
+                        <li>Test before you commit</li>
+                        <li>Email support</li>
+                    </ul>
+                    <a href="mailto:wouter@lemaire.tech" class="btn btn-secondary">Request Trial</a>
+                </div>
+                <div class="pricing-card">
                     <h3>Professional</h3>
                     <div class="pricing-price">
                         <div class="price-current">€399<span>/month</span></div>
                     </div>
                     <ul class="pricing-features">
-                        <li>1 MCP server</li>
-                        <li>3 SAP systems</li>
                         <li>Full hints UI</li>
                         <li>Advanced monitoring</li>
                         <li>Priority support</li>
@@ -1736,7 +1750,6 @@
                 </div>
             </div>
             <p class="pricing-note"><strong>Setup & onboarding:</strong> €2,000 one-time fee</p>
-            <p class="pricing-note" style="margin-top: 12px;"><strong>Free Trial:</strong> Request a trial edition — test with 3 APIs and 6 hints before you commit</p>
         </div>
     </section>
 
