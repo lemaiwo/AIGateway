@@ -755,52 +755,6 @@
             }
         }
 
-        /* Early Access */
-        .early-access {
-            padding: 100px 0;
-        }
-
-        .early-boxes {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .early-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-        }
-
-        .early-box h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: var(--primary);
-        }
-
-        .early-box ul {
-            list-style: none;
-        }
-
-        .early-box li {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 12px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .early-box li::before {
-            content: '✓';
-            color: var(--primary);
-            font-weight: 600;
-        }
-
         /* Pricing */
         .pricing {
             padding: 100px 0;
@@ -854,13 +808,6 @@
             margin: 24px 0;
         }
 
-        .price-original {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            text-decoration: line-through;
-            margin-bottom: 4px;
-        }
-
         .price-current {
             font-size: 2.5rem;
             font-weight: 700;
@@ -870,17 +817,6 @@
             font-size: 1rem;
             font-weight: 400;
             color: var(--text-secondary);
-        }
-
-        .price-early {
-            display: inline-block;
-            background: rgba(0, 212, 170, 0.1);
-            color: var(--primary);
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-top: 8px;
         }
 
         .pricing-features {
@@ -1379,7 +1315,7 @@
                 <div>
                     <div class="badge">
                         <span class="badge-dot"></span>
-                        Early Access Program
+                        Now Available
                     </div>
                     <h1>Connect any AI agent to your SAP systems</h1>
                     <p class="hero-subtitle">
@@ -1756,36 +1692,6 @@
         </div>
     </section>
 
-    <!-- Early Access -->
-    <section class="early-access">
-        <div class="container">
-            <div class="section-header">
-                <h2>🚀 Early Access Program</h2>
-                <p>Be among the first to connect AI to SAP</p>
-            </div>
-            <div class="early-boxes">
-                <div class="early-box">
-                    <h3>Current Status</h3>
-                    <ul>
-                        <li>Core platform is open source</li>
-                        <li>Advanced features in customer pilot</li>
-                        <li>Validated with MM, SD, and PP modules</li>
-                        <li>Production-ready architecture</li>
-                    </ul>
-                </div>
-                <div class="early-box">
-                    <h3>What Early Access Means</h3>
-                    <ul>
-                        <li>50% discount on all plans</li>
-                        <li>Direct access to developers</li>
-                        <li>Shape the product roadmap</li>
-                        <li>Priority feature requests</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Pricing -->
     <section id="pricing" class="pricing">
         <div class="container">
@@ -1797,9 +1703,7 @@
                 <div class="pricing-card">
                     <h3>Starter</h3>
                     <div class="pricing-price">
-                        <div class="price-original">€299/month</div>
                         <div class="price-current">€149<span>/month</span></div>
-                        <div class="price-early">Early Access Price</div>
                     </div>
                     <ul class="pricing-features">
                         <li>1 SAP system</li>
@@ -1813,9 +1717,7 @@
                     <div class="pricing-badge">Most Popular</div>
                     <h3>Professional</h3>
                     <div class="pricing-price">
-                        <div class="price-original">€799/month</div>
                         <div class="price-current">€399<span>/month</span></div>
-                        <div class="price-early">Early Access Price</div>
                     </div>
                     <ul class="pricing-features">
                         <li>3 SAP systems</li>
