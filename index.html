@@ -763,9 +763,9 @@
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            max-width: 1200px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1000px;
             margin: 0 auto 40px;
         }
 
@@ -954,13 +954,6 @@
         }
 
         /* Responsive */
-        @media (max-width: 1200px) {
-            .pricing-grid {
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 700px;
-            }
-        }
-
         @media (max-width: 1024px) {
             .pricing-grid {
                 grid-template-columns: 1fr;
@@ -1700,19 +1693,6 @@
                 <p>Start small, scale as you grow</p>
             </div>
             <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Starter</h3>
-                    <div class="pricing-price">
-                        <div class="price-current">€149<span>/month</span></div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>1 SAP system</li>
-                        <li>Setup wizard</li>
-                        <li>Basic monitoring</li>
-                        <li>Email support</li>
-                    </ul>
-                    <a href="mailto:wouter@lemaire.tech" class="btn btn-secondary">Get Started</a>
-                </div>
                 <div class="pricing-card featured">
                     <div class="pricing-badge">Most Popular</div>
                     <h3>Professional</h3>
@@ -1720,6 +1700,7 @@
                         <div class="price-current">€399<span>/month</span></div>
                     </div>
                     <ul class="pricing-features">
+                        <li>1 MCP server</li>
                         <li>3 SAP systems</li>
                         <li>Full hints UI</li>
                         <li>Advanced monitoring</li>
