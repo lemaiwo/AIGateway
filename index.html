@@ -809,9 +809,9 @@
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            max-width: 1100px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
             margin: 0 auto 40px;
         }
 
@@ -1018,6 +1018,13 @@
         }
 
         /* Responsive */
+        @media (max-width: 1200px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 700px;
+            }
+        }
+
         @media (max-width: 1024px) {
             .pricing-grid {
                 grid-template-columns: 1fr;
@@ -1826,13 +1833,27 @@
                     <ul class="pricing-features">
                         <li>Unlimited SAP systems</li>
                         <li>Dedicated instance</li>
-                        <li>On-premise option</li>
+                        <li>Managed hosting</li>
                         <li>SLA guarantee</li>
                     </ul>
                     <a href="mailto:wouter@lemaire.tech" class="btn btn-secondary">Contact Sales</a>
                 </div>
+                <div class="pricing-card">
+                    <h3>Self-Hosted</h3>
+                    <div class="pricing-price">
+                        <div class="price-current">€4,500<span> one-time</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Perpetual license</li>
+                        <li>Run on your infrastructure</li>
+                        <li>Full source access</li>
+                        <li>1 year of updates</li>
+                    </ul>
+                    <a href="mailto:wouter@lemaire.tech" class="btn btn-secondary">Get License</a>
+                </div>
             </div>
             <p class="pricing-note"><strong>Setup & onboarding:</strong> €2,000 one-time fee</p>
+            <p class="pricing-note" style="margin-top: 12px;"><strong>Free Trial:</strong> Request a trial edition — test with 3 APIs and 6 hints before you commit</p>
         </div>
     </section>
 
