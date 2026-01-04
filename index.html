@@ -763,10 +763,17 @@
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto 40px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pricing-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            line-height: 1.5;
         }
 
         .pricing-card {
@@ -954,20 +961,6 @@
         }
 
         /* Responsive */
-        @media (max-width: 1200px) {
-            .pricing-grid {
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 700px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-            }
-        }
-
         @media (max-width: 1024px) {
             .steps {
                 grid-template-columns: repeat(2, 1fr);
@@ -1005,6 +998,11 @@
         }
 
         @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
             .nav-links {
                 display: none;
                 position: absolute;
@@ -1711,67 +1709,37 @@
         </div>
     </section>
 
-    <!-- Pricing -->
+    <!-- Get Started -->
     <section id="pricing" class="pricing">
         <div class="container">
             <div class="section-header">
-                <h2>Simple, Transparent Pricing</h2>
-                <p>Start small, scale as you grow</p>
+                <h2>Get Started</h2>
+                <p>Try it free or get the full product</p>
             </div>
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3>Free Trial</h3>
-                    <div class="pricing-price">
-                        <div class="price-current">Free</div>
-                    </div>
+                    <p class="pricing-desc">Test AI Gateway with your SAP system before you commit</p>
                     <ul class="pricing-features">
                         <li>3 APIs</li>
                         <li>6 hints</li>
-                        <li>Test before you commit</li>
+                        <li>Full functionality</li>
                         <li>Email support</li>
                     </ul>
                     <a href="mailto:wouter@lemaire.tech" class="btn btn-secondary">Request Trial</a>
                 </div>
                 <div class="pricing-card">
-                    <h3>Professional</h3>
-                    <div class="pricing-price">
-                        <div class="price-current">€399<span>/month</span></div>
-                    </div>
+                    <h3>Buy Product</h3>
+                    <p class="pricing-desc">Get the full AI Gateway solution for your organization</p>
                     <ul class="pricing-features">
+                        <li>Unlimited APIs & hints</li>
                         <li>Full hints UI</li>
                         <li>Advanced monitoring</li>
                         <li>Priority support</li>
                     </ul>
-                    <a href="mailto:wouter@lemaire.tech" class="btn btn-primary">Get Started</a>
-                </div>
-                <div class="pricing-card">
-                    <h3>Enterprise</h3>
-                    <div class="pricing-price">
-                        <div class="price-current">Custom</div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>Unlimited SAP systems</li>
-                        <li>Dedicated instance</li>
-                        <li>Managed hosting</li>
-                        <li>SLA guarantee</li>
-                    </ul>
-                    <a href="mailto:wouter@lemaire.tech" class="btn btn-secondary">Contact Sales</a>
-                </div>
-                <div class="pricing-card">
-                    <h3>Self-Hosted</h3>
-                    <div class="pricing-price">
-                        <div class="price-current">€4,500<span> one-time</span></div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>Perpetual license</li>
-                        <li>Run on your infrastructure</li>
-                        <li>Full source access</li>
-                        <li>1 year of updates</li>
-                    </ul>
-                    <a href="mailto:wouter@lemaire.tech" class="btn btn-secondary">Get License</a>
+                    <a href="mailto:wouter@lemaire.tech" class="btn btn-primary">Contact Sales</a>
                 </div>
             </div>
-            <p class="pricing-note"><strong>Setup & onboarding:</strong> €2,000 one-time fee</p>
         </div>
     </section>
 
