@@ -652,6 +652,79 @@
             margin: 0 auto;
         }
 
+        /* Business Case */
+        .business-case {
+            padding: 100px 0;
+        }
+
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .business-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .business-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .business-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .business-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .business-highlight {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(240, 171, 0, 0.1));
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            max-width: 800px;
+            margin: 60px auto 0;
+        }
+
+        .business-highlight h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .business-highlight p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .business-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .business-highlight {
+                padding: 30px 24px;
+            }
+
+            .business-highlight h3 {
+                font-size: 1.25rem;
+            }
+        }
+
         /* Compatible Agents */
         .agents {
             padding: 80px 0;
@@ -1706,6 +1779,37 @@
             <blockquote>
                 "Currently deployed with an enterprise SAP customer moving from proof-of-concept to production."
             </blockquote>
+        </div>
+    </section>
+
+    <!-- Business Case -->
+    <section class="business-case">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Business Case</h2>
+                <p>Stop building custom integrations. Start connecting AI to SAP in days, not months.</p>
+            </div>
+            <div class="business-grid">
+                <div class="business-card">
+                    <div class="business-icon">💰</div>
+                    <h3>Reduce Development Costs</h3>
+                    <p>Custom AI-SAP integrations typically cost €50,000–€200,000 in consulting and development. AI Gateway delivers the same result at a fraction of the cost.</p>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon">⚡</div>
+                    <h3>Faster Time to Value</h3>
+                    <p>Go from idea to production in days instead of months. No waiting for development cycles, no dependency on scarce SAP specialists.</p>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon">🔧</div>
+                    <h3>Zero Maintenance Burden</h3>
+                    <p>No custom code to maintain, no integration breaking on SAP updates. AI Gateway handles the complexity so your team can focus on business value.</p>
+                </div>
+            </div>
+            <div class="business-highlight">
+                <h3>Build vs. Buy: The Math is Simple</h3>
+                <p>A single failed AI integration project costs more than years of AI Gateway. Get it right the first time with a proven solution that's already running in production.</p>
+            </div>
         </div>
     </section>
 
