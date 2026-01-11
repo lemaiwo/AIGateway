@@ -652,6 +652,162 @@
             margin: 0 auto;
         }
 
+        /* Business Case */
+        .business-case {
+            padding: 100px 0;
+        }
+
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .business-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .business-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .business-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .business-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .business-highlight {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(240, 171, 0, 0.1));
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            max-width: 800px;
+            margin: 60px auto 0;
+        }
+
+        .business-highlight h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .business-highlight p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Before/After Comparison */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 24px;
+            align-items: stretch;
+            margin-top: 60px;
+        }
+
+        .comparison-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .comparison-box.before {
+            border-color: var(--error);
+        }
+
+        .comparison-box.after {
+            border-color: var(--primary);
+        }
+
+        .comparison-box h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .comparison-box.before h4 {
+            color: var(--error);
+        }
+
+        .comparison-box.after h4 {
+            color: var(--primary);
+        }
+
+        .comparison-box ul {
+            list-style: none;
+        }
+
+        .comparison-box li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .comparison-box.before li::before {
+            content: '✗';
+            color: var(--error);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .comparison-box.after li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .comparison-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .business-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .business-highlight {
+                padding: 30px 24px;
+            }
+
+            .business-highlight h3 {
+                font-size: 1.25rem;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
         /* Compatible Agents */
         .agents {
             padding: 80px 0;
@@ -1706,6 +1862,60 @@
             <blockquote>
                 "Currently deployed with an enterprise SAP customer moving from proof-of-concept to production."
             </blockquote>
+        </div>
+    </section>
+
+    <!-- Business Case -->
+    <section class="business-case">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Business Case</h2>
+                <p>Stop building custom integrations. Start connecting AI to SAP in days, not months.</p>
+            </div>
+            <div class="business-grid">
+                <div class="business-card">
+                    <div class="business-icon">⚡</div>
+                    <h3>10x Faster</h3>
+                    <p>Tasks that took minutes now take seconds. Natural language queries replace manual navigation through complex SAP screens.</p>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon">🎯</div>
+                    <h3>Zero Learning Curve</h3>
+                    <p>No SAP expertise required. Anyone can query SAP data using plain English — no transaction codes, no training needed.</p>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon">🚀</div>
+                    <h3>Weeks, Not Months</h3>
+                    <p>Standard MCP protocol means no custom development. Go from pilot to production without waiting for development cycles.</p>
+                </div>
+            </div>
+            <div class="comparison">
+                <div class="comparison-box before">
+                    <h4>Before AI Gateway</h4>
+                    <ul>
+                        <li>Navigate complex SAP screens manually</li>
+                        <li>Weeks of SAP training for new users</li>
+                        <li>Errors from manual data entry</li>
+                        <li>Months of custom integration work</li>
+                        <li>Dependency on scarce SAP specialists</li>
+                    </ul>
+                </div>
+                <div class="comparison-arrow">→</div>
+                <div class="comparison-box after">
+                    <h4>With AI Gateway</h4>
+                    <ul>
+                        <li>Natural language queries in seconds</li>
+                        <li>Instant access for any team member</li>
+                        <li>Consistent, validated results</li>
+                        <li>Production-ready in days</li>
+                        <li>Works with any AI agent you choose</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="business-highlight">
+                <h3>Build vs. Buy: The Math is Simple</h3>
+                <p>Custom AI-SAP integrations cost €50,000–€200,000 and take months. A single failed project costs more than years of AI Gateway. Get it right the first time.</p>
+            </div>
         </div>
     </section>
 
